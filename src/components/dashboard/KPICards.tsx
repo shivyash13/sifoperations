@@ -1,8 +1,7 @@
 
-import { AdmissionsStats } from '@/types/database';
 import { Users, CheckCircle, Target } from 'lucide-react';
 
-export default function KPICards({ data }: { data: AdmissionsStats }) {
+export default function KPICards({ data }: { data: { total_target: number; confirmed: number; remaining: number } }) {
     const { total_target, confirmed, remaining } = data;
 
     return (
