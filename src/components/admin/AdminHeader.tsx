@@ -3,7 +3,8 @@
 
 import { logout } from '@/actions/admin';
 import { useRouter } from 'next/navigation';
-import { Shield, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AdminHeader() {
     const router = useRouter();
@@ -19,8 +20,14 @@ export default function AdminHeader() {
             <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-4">
-                        <div className="bg-white/10 backdrop-blur-sm p-3 rounded-xl">
-                            <Shield className="text-white" size={28} />
+                        <div className="">
+                            <Image
+                                src="/logo.jpg"
+                                alt="The Sunyatee Retreat Logo"
+                                width={48}
+                                height={48}
+                                className="rounded-lg object-cover mix-blend-screen"
+                            />
                         </div>
                         <div>
                             <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">

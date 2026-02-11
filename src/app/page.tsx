@@ -1,8 +1,8 @@
-
+import Image from 'next/image';
 import DashboardClient from '@/components/dashboard/DashboardClient';
 import { createClient } from '@/lib/supabase';
 import { DashboardData } from '@/types/database';
-import { Building2, Activity } from 'lucide-react';
+import { Activity } from 'lucide-react';
 
 // Revalidate every 0 seconds (always fresh on refresh) or relies on Client Side Realtime
 export const revalidate = 0;
@@ -34,8 +34,14 @@ export default async function Home() {
       <header className="bg-gradient-to-r from-primary to-primary-light shadow-lg">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
           <div className="flex items-center gap-4">
-            <div className="bg-white/10 backdrop-blur-sm p-3 rounded-xl">
-              <Building2 className="text-white" size={32} />
+            <div className="">
+              <Image
+                src="/logo.jpg"
+                alt="The Sunyatee Retreat Logo"
+                width={60}
+                height={60}
+                className="rounded-lg object-cover mix-blend-screen"
+              />
             </div>
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">

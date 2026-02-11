@@ -65,17 +65,22 @@ export async function updateTaskStatus(taskId: string, status: 'pending' | 'in_p
     revalidatePath('/admin');
 }
 
-export async function updateStats(confirmed: number) {
+export async function updateStats(confirmed: number, totalTarget?: number) {
     await checkAuth();
     // We assume there is only one row in stats, or we update the most recent one.
     // Ideally we know the ID, but for simplicity we'll update all (should be 1) or insert if 0.
     const { data } = await supabaseAdmin.from('admissions_stats').select('id').limit(1).single();
 
+    const updateData: { confirmed: number, total_target?: number } = { confirmed };
+    if (totalTarget !== undefined) {
+        updateData.total_target = totalTarget;
+    }
+
     if (data) {
-        const { error } = await supabaseAdmin.from('admissions_stats').update({ confirmed }).eq('id', data.id);
+        const { error } = await supabaseAdmin.from('admissions_stats').update(updateData).eq('id', data.id);
         if (error) throw error;
     } else {
-        const { error } = await supabaseAdmin.from('admissions_stats').insert({ total_target: 100, confirmed });
+        const { error } = await supabaseAdmin.from('admissions_stats').insert({ total_target: totalTarget || 100, confirmed });
         if (error) throw error;
     }
     revalidatePath('/');
